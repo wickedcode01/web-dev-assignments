@@ -1,0 +1,193 @@
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+
+  .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      /* Maximum width for larger screens */
+      box-sizing: border-box;
+      /* Include padding and border in the element's total width and height */
+  }
+
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  label {
+      display: block;
+      /* Labels on top of inputs */
+      margin-bottom: 5px;
+      font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      /* Important for consistent sizing */
+      font-size: 16px;
+  }
+
+
+  /* Style for focused inputs */
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus,
+  select:focus {
+      border-color: #007bff;
+      /* Example focus color */
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      outline: none;
+      /* Remove default focus outline */
+  }
+
+
+  textarea {
+      resize: vertical;
+      /* Allow vertical resizing */
+      height: 120px;
+      /* Initial height */
+      min-height: 80px;
+      /*Ensure users can make it smaller if they have a short message*/
+      max-height: 300px;
+      /*Limits the size to stop it taking over the page*/
+  }
+
+  /* Custom Scrollbar for Textarea (Webkit browsers) */
+  textarea::-webkit-scrollbar {
+      width: 8px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+      background: #555;
+  }
+
+  /* Radio Button Styling */
+  .radio-group label {
+      display: inline-block;
+      /* Keep radio and label together */
+      margin-right: 15px;
+      margin-bottom: 0;
+  }
+
+  .radio-options {
+      display: flex;
+      /* Use flexbox for inline layout and spacing*/
+      gap: 20px;
+      /* Adds space between the radio button options */
+  }
+
+  .radio-options>div {
+      display: flex;
+      /* Aligns the radio button and its label */
+      align-items: center;
+      /* Vertically centers the radio button and label */
+      gap: 5px;
+      /* Adds a small gap between the radio button and label */
+  }
+
+  /* Custom Checkbox Styling (Basic) */
+  .form-group input[type="checkbox"]+label {
+      display: inline-block;
+      margin-left: 5px;
+      vertical-align: middle;
+  }
+
+  .form-group input[type="checkbox"] {
+      margin-top: 5px;
+  }
+
+  /* Submit Button */
+  button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      /* Full width by default */
+      transition: background-color 0.3s ease;
+      /* Smooth transition for hover effect */
+  }
+
+  button[type="submit"]:hover {
+      background-color: #367c39;
+      /* Darker green on hover */
+      scale: 1.05;
+  }
+
+  /* Responsive Design */
+
+  /* Mobile (up to 480px) */
+  @media (max-width: 480px) {
+      .form-container {
+          padding: 15px;
+      }
+
+      /* No further changes needed, as the default styles stack vertically */
+  }
+
+  /* Tablet (481px to 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+      .form-container {
+          padding: 20px;
+      }
+
+      /* Adjust as needed for tablets */
+  }
+
+  /* Desktop (769px and above) - already handled by max-width on .form-container */
+
+  /* Message Container */
+  .message-container {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+      /* Hidden by default */
+  }
+
+  .message-container.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+  }
+
+  .message-container.error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+  }
