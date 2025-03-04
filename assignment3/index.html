@@ -91,6 +91,8 @@
 
         // Simulate form submission
         setTimeout(function () {
+            // Make sure the message can be displayed
+            messageContainer.style.display = 'block';
             messageContainer.textContent = 'Your message has been submitted.';
             messageContainer.classList.add('success');
 
