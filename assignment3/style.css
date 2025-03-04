@@ -54,7 +54,7 @@
   textarea:focus,
   select:focus {
       border-color: #007bff;
-      /* Example focus color */
+      /* Focus color */
       box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
       outline: none;
       /* Remove default focus outline */
