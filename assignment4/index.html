@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Management</h1>
+            <button id="themeToggle">Toggle Theme</button>
+        </header>
+
+        <div class="task-controls">
+            <form id="taskForm">
+                <input type="text" id="taskTitle" placeholder="Task Title" required>
+                <textarea id="taskDescription" placeholder="Task Description" required></textarea>
+                <select id="taskPriority" required>
+                    <option value="">Select Priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <select id="taskCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="urgent">Urgent</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="Search tasks...">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="urgent">Urgent</option>
+                </select>
+                <select id="prioritySort">
+                    <option value="all">All Priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="notification" class="notification"></div>
+        <div id="taskList" class="task-list"></div>
+    </div>
+
+    <script src="Task.js"></script>
+    <script src="TaskManager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
