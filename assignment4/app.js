@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const task = taskManager.getTask(taskId);
         if (task) {
             task.toggleComplete();
+            taskManager.saveTasks();
             renderTasks();
         }
     };
