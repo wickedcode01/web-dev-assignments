@@ -12,9 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.toggle('dark-theme');
     });
 
+    // Add this at the top of the file (after DOMContentLoaded event)
+    let isEditing = false;
+
     // Form submission
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        if (isEditing) return;  // Prevent duplicate submissions
+        
         const title = document.getElementById('taskTitle').value;
         const description = document.getElementById('taskDescription').value;
         const priority = document.getElementById('taskPriority').value;
@@ -66,12 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Global functions for task actions
     window.editTask = (taskId) => {
+        isEditing = true;
         const task = taskManager.getTask(taskId);
         if (task) {
+            // change button text
+            const submitButton = document.getElementById('submitButton');
+            submitButton.textContent = 'Update Task';
+
             document.getElementById('taskTitle').value = task.title;
             document.getElementById('taskDescription').value = task.description;
             document.getElementById('taskPriority').value = task.priority;
             document.getElementById('taskCategory').value = task.category;
+
+            // Save the original handler
+            const originalHandler = taskForm.onsubmit;
 
             // Change form submit behavior temporarily
             taskForm.onsubmit = (e) => {
@@ -85,8 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 renderTasks();
                 taskForm.reset();
-                // Reset form submit behavior
-                taskForm.onsubmit = null;
+                submitButton.textContent = 'Add Task';
+                // Restore original handler
+                taskForm.onsubmit = originalHandler;
+                isEditing = false;  // Clear editing flag
             };
         }
     };
