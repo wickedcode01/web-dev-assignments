@@ -43,11 +43,10 @@ class TaskManager {
     updateTask(taskId, title, description, priority, category) {
         const task = this.getTask(taskId);
         if (task) {
-            const oldPriority = task.priority;
             task.update(title, description, priority, category);
             this.saveTasks();
-            if (priority === 'high' && oldPriority !== 'high') {
-                this.showNotification(`Task updated to high priority: ${title}`);
+            if (priority === 'high') {
+                this.showNotification(`Task updated: ${title}`);
             }
         }
     }
@@ -81,6 +80,9 @@ class TaskManager {
     toggleComplete(taskId) {
         const task = this.getTask(taskId);
         if (task) {
+            if (task.priority === 'high') {
+                this.showNotification('High priority task completed!');
+            }
             task.toggleComplete();
             this.saveTasks();
         }

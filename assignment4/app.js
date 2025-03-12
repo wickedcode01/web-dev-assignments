@@ -5,12 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
     const prioritySort = document.getElementById('prioritySort');
-    const themeToggle = document.getElementById('themeToggle');
 
-    // Theme toggle
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-    });
+
+
 
     // Add this at the top of the file (after DOMContentLoaded event)
     let isEditing = false;
@@ -19,13 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         if (isEditing) return;  // Prevent duplicate submissions
-        
+
         const title = document.getElementById('taskTitle').value;
         const description = document.getElementById('taskDescription').value;
         const priority = document.getElementById('taskPriority').value;
         const category = document.getElementById('taskCategory').value;
 
         taskManager.addTask(title, description, priority, category);
+        taskManager.showNotification('Task added successfully!');
         renderTasks();
         taskForm.reset();
     });
@@ -114,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.toggleComplete = (taskId) => {
         const task = taskManager.getTask(taskId);
         if (task) {
-            task.toggleComplete();
-            taskManager.saveTasks();
+            taskManager.toggleComplete(taskId);
             renderTasks();
         }
     };
@@ -123,3 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial render
     renderTasks();
 });
+
+// Theme toggle
+const toggleTheme = () => {
+    document.body.classList.toggle('dark-theme');
+    console.log('switch theme')
+};

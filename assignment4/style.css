@@ -50,6 +50,10 @@ input, textarea, select, button {
     color: var(--text-color);
 }
 
+button {
+    cursor: pointer;
+}
+
 .filters {
     display: flex;
     gap: 10px;
