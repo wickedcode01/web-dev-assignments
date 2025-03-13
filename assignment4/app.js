@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = document.getElementById('taskCategory').value;
 
         taskManager.addTask(title, description, priority, category);
-        taskManager.showNotification('Task added successfully!');
+        // taskManager.showNotification('Task added successfully!');
         renderTasks();
         taskForm.reset();
     });
