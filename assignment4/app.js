@@ -5,10 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
     const prioritySort = document.getElementById('prioritySort');
-
-
-
-
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', toggleTheme);
     // Add this at the top of the file (after DOMContentLoaded event)
     let isEditing = false;
 
