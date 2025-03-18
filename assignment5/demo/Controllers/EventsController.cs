@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using demo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace demo.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,6 +19,7 @@ namespace demo.Controllers
         }
 
         // GET: Events
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Events.ToListAsync());
