@@ -20,7 +20,7 @@ public static class SeedData
             context.Events.AddRange(
                 new Event
                 {
-                    Title = "technical semniar",
+                    Title = "Technical semniar",
                     Description = "Discuss web3 development",
                     Date = DateTime.Now.AddDays(7),
                     Time = DateTime.Now.Date.AddHours(14),
