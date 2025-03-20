@@ -21,11 +21,13 @@
                 <option value="General Checkup" selected="@(ViewBag.AppointmentType == "general-checkup")">General Checkup</option>
                 <option value="Vaccination" selected="@(ViewBag.AppointmentType == "vaccination")">Vaccination</option>
             </select>
+            <span asp-validation-for="AppointmentType" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
             <label asp-for="AppointmentDate">Select Date:</label>
             <input asp-for="AppointmentDate" type="date" class="form-control" required />
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
@@ -42,17 +44,21 @@
         <div class="form-group mb-3">
             <label asp-for="PatientName">Your Name:</label>
             <input asp-for="PatientName" class="form-control" required />
+            <span asp-validation-for="PatientName" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
             <label asp-for="PatientEmail">Email:</label>
             <input asp-for="PatientEmail" type="email" class="form-control" required />
+            <span asp-validation-for="PatientEmail" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
             <label asp-for="Description">Brief Description:</label>
             <textarea asp-for="Description" class="form-control" rows="3"></textarea>
         </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
         <button type="submit" class="btn btn-primary">Confirm</button>
     </form>

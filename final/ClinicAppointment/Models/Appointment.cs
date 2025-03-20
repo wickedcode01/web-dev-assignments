@@ -15,7 +15,8 @@ namespace ClinicAppointment.Models
 
         [Required]
         public string PatientName { get; set; }
-
+        [Required]
+        public string UserId { get; set; }
         [Required]
         [EmailAddress]
         public string PatientEmail { get; set; }
