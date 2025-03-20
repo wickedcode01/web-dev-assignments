@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using ClinicAppointment.Models;
 
 namespace ClinicAppointment.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         [HttpGet]
