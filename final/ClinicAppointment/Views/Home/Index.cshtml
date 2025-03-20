@@ -1,0 +1,45 @@
+﻿@using ClinicAppointment.Models
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Welcome to Health Clinic";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Health Clinic</h1>
+        
+        <div class="my-4">
+            <a href="/Appointment/Book" class="btn btn-primary btn-lg">Book Appointment</a>
+        </div>
+
+        <div class="card my-4">
+            <div class="card-body">
+                <h2>Current Wait Time</h2>
+                <div class="display-1 text-primary">@Model.CurrentWaitTime min</div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            @foreach (var appointmentType in Model.AvailableAppointmentTypes)
+            {
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h3>@appointmentType.Name</h3>
+                            <p>@appointmentType.Description</p>
+                            <a href="/Appointment/Book/@appointmentType.Id" class="btn btn-outline-primary">
+                                Book Now →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add any client-side functionality here
+    </script>
+}
