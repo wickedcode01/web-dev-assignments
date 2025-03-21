@@ -18,41 +18,55 @@ namespace ClinicAppointment.Controllers
         }
 
         [HttpGet]
-        public IActionResult Book(string id = null)
+        public IActionResult Book(string? Type )
         {
             // In a real application, you would fetch available time slots from a service
             var availableTimeSlots = new[]
             {
                 new { Time = "9:00", Value = "09:00" },
-                new { Time = "10:15", Value = "10:15" },
-                new { Time = "11:30", Value = "11:30" }
+                new { Time = "10:00", Value = "10:00" },
+                new { Time = "11:00", Value = "11:00" },
+                new { Time = "12:00", Value = "12:00" },
+                new { Time = "13:00", Value = "13:00" },
+                new { Time = "14:00", Value = "14:00" },
             };
 
             ViewBag.AvailableTimeSlots = availableTimeSlots;
-            ViewBag.AppointmentType = id ?? "general-checkup";
-            
-            return View(new Appointment());
+            ViewBag.AppointmentType = Type ?? "general-checkup";
+            System.Diagnostics.Debug.WriteLine($"Type: {Type}");
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Book(Appointment appointment)
         {
+            
+            appointment.UserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            appointment.ConfirmationNumber = GenerateConfirmationNumber();
+
+            // // Clear validation errors for system-set fields
+            // ModelState.Remove("UserId");
+            // ModelState.Remove("ConfirmationNumber");
+
             if (!ModelState.IsValid)
             {
-                // Log validation errors
-                foreach (var modelError in ModelState.Values.SelectMany(v => v.Errors))
+                // Log detailed validation errors
+                foreach (var modelStateEntry in ModelState)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Validation Error: {modelError.ErrorMessage}");
+                    var propertyName = modelStateEntry.Key;
+                    foreach (var error in modelStateEntry.Value.Errors)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Property {propertyName} failed validation: {error.ErrorMessage}");
+                        System.Diagnostics.Debug.WriteLine($"Error State: {modelStateEntry.Value.ValidationState}");
+                        System.Diagnostics.Debug.WriteLine($"Raw Value: {modelStateEntry.Value.RawValue}");
+                        System.Diagnostics.Debug.WriteLine($"Attempted Value: {modelStateEntry.Value.AttemptedValue}");
+                    }
                 }
             }
 
             if (ModelState.IsValid)
             {
-                // Set the user ID for the appointment
-                appointment.UserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 appointment.Status = AppointmentStatus.Pending;
-                appointment.ConfirmationNumber = GenerateConfirmationNumber();
-
                 _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
 
@@ -67,8 +81,11 @@ namespace ClinicAppointment.Controllers
             var availableTimeSlots = new[]
             {
                 new { Time = "9:00", Value = "09:00" },
-                new { Time = "10:15", Value = "10:15" },
-                new { Time = "11:30", Value = "11:30" }
+                new { Time = "10:00", Value = "10:00" },
+                new { Time = "11:00", Value = "11:00" },
+                new { Time = "12:00", Value = "12:00" },
+                new { Time = "13:00", Value = "13:00" },
+                new { Time = "14:00", Value = "14:00" },
             };
             ViewBag.AvailableTimeSlots = availableTimeSlots;
             return View(appointment);

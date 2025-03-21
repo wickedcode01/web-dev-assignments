@@ -22,13 +22,13 @@ public class HomeController : Controller
             {
                 new AppointmentType 
                 { 
-                    Id = "general-checkup",
+                    Type = "general-checkup",
                     Name = "General Checkup",
                     Description = "Regular health checkup and consultation"
                 },
                 new AppointmentType 
                 { 
-                    Id = "vaccination",
+                    Type = "vaccination",
                     Name = "Vaccinations",
                     Description = "Various vaccination services"
                 }
