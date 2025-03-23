@@ -20,34 +20,18 @@ namespace ClinicAppointment.Controllers
         }
 
         [HttpGet]
-        public IActionResult Book(string? Type, string appointmentDate)
+        public IActionResult Book(string? Type)
         {
             var timeZone = DateTimeZoneProviders.Tzdb["America/Toronto"];
             var now = _clock.GetCurrentInstant().InZone(timeZone);
-
-            ZonedDateTime dateToUse;
-            if (string.IsNullOrEmpty(appointmentDate))
-            {
-                dateToUse = now;
-            }
-            else
-            {
-                if (!DateTime.TryParse(appointmentDate, out DateTime parsedDate))
-                {
-                    ModelState.AddModelError("AppointmentDate", "Invalid date format.");
-                    return View();
-                }
-
-                var localDateTime = LocalDateTime.FromDateTime(parsedDate);
-                dateToUse = timeZone.AtLeniently(localDateTime);
-            }
+            ZonedDateTime dateToUse = now;
             var appointmentType = Type ?? "general-checkup";
             var availableSlots = GenerateAvailableSlots(dateToUse, out ZonedDateTime adjustedDate, appointmentType);
 
             ViewBag.AvailableTimeSlots = availableSlots;
             ViewBag.AppointmentType = appointmentType;
             ViewBag.AdjustedDate = adjustedDate;
-            ViewBag.AppointmentDate = adjustedDate.ToString("yyyy-MM-dd", null); // Auto-updated date
+            ViewBag.AppointmentDate = adjustedDate.ToDateTimeUnspecified();
 
             return View();
         }
@@ -55,11 +39,6 @@ namespace ClinicAppointment.Controllers
         [HttpPost]
         public async Task<IActionResult> Book(Appointment appointment)
         {
-            //if (appointment.AppointmentDate == default)
-            //{
-            //    ModelState.AddModelError("AppointmentDate", "The selected date is required.");
-            //    return View(appointment);
-            //}
 
             var timeZone = DateTimeZoneProviders.Tzdb["America/Toronto"];
             var now = _clock.GetCurrentInstant().InZone(timeZone);
@@ -82,7 +61,7 @@ namespace ClinicAppointment.Controllers
             {
                 ModelState.AddModelError("TimeSlot", "The selected time slot is no longer available. Please choose another.");
                 ViewBag.AvailableTimeSlots = availableSlots;
-                ViewBag.AppointmentDate = adjustedDate.ToString("yyyy-MM-dd", null);
+                ViewBag.AppointmentDate = adjustedDate;
                 return View(appointment);
             }
 
@@ -98,15 +77,17 @@ namespace ClinicAppointment.Controllers
                     Console.WriteLine($"{error.Key}: {string.Join(", ", error.Value.Errors.Select(e => e.ErrorMessage))}");
                 }
                 ViewBag.AvailableTimeSlots = availableSlots;
-                ViewBag.AppointmentDate = adjustedDate.ToString("yyyy-MM-dd", null);
+                ViewBag.AppointmentDate = adjustedDate;
                 return View(appointment);
             }
 
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Appointment booked successfully! Your confirmation number is: " + appointment.ConfirmationNumber;
-            return RedirectToAction("Index", "Home");
+            // Redirect to confirmation page instead of home page    
+            return RedirectToAction("Confirmation", new { id = appointment.ConfirmationNumber });
+            
+
         }
 
         [HttpPost]
@@ -121,7 +102,7 @@ namespace ClinicAppointment.Controllers
             var localDateTime = LocalDateTime.FromDateTime(parsedDate);
             var dateToUse = timeZone.AtLeniently(localDateTime);
 
-            var availableSlots = GenerateAvailableSlots(dateToUse, out _, appointmentType);
+            var availableSlots = GenerateAvailableSlots(dateToUse, out ZonedDateTime adjustedDate, appointmentType);
 
             return PartialView("_AvailableSlotsPartial", availableSlots);
         }
@@ -130,7 +111,7 @@ namespace ClinicAppointment.Controllers
         {
             var availableSlots = new List<string>();
             int startHour = 9, endHour = 18; // Business hours (9 AM - 6 PM)
-            var slotDuration = Period.FromMinutes(15); // Slot duration (15 minutes)
+            var slotDuration = Period.FromMinutes(30); // Slot duration (30 minutes)
 
             ZonedDateTime now = _clock.GetCurrentInstant().InZone(selectedDate.Zone);
             adjustedDate = selectedDate;
@@ -192,14 +173,14 @@ namespace ClinicAppointment.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Update appointment status to confirmed
             appointment.Status = AppointmentStatus.Confirmed;
             await _context.SaveChangesAsync();
 
+            // Show success message
             TempData["SuccessMessage"] = "Appointment confirmed successfully!";
+            
             return View(appointment);
         }
-
-
-
     }
-}
+} 
