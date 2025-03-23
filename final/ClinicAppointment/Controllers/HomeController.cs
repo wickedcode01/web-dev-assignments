@@ -1,23 +1,26 @@
 using System.Diagnostics;
 using ClinicAppointment.Models;
 using Microsoft.AspNetCore.Mvc;
+using ClinicAppointment.Services;
 
 namespace ClinicAppointment.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IWaitTimeService _waitTimeService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IWaitTimeService waitTimeService)
     {
         _logger = logger;
+        _waitTimeService = waitTimeService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         var viewModel = new HomeViewModel
         {
-            CurrentWaitTime = 25, // This would typically come from a service
+            CurrentWaitTime = await _waitTimeService.GetCurrentWaitTimeAsync(),
             AvailableAppointmentTypes = new List<AppointmentType>
             {
                 new AppointmentType 
