@@ -70,11 +70,8 @@ namespace ClinicAppointment.Controllers
                 _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
 
-                // Add success message
-                TempData["SuccessMessage"] = "Appointment booked successfully! Your confirmation number is: " + appointment.ConfirmationNumber;
-                
-                // Redirect to home page
-                return RedirectToAction("Index", "Home");
+                // Redirect to confirmation page instead of home page
+                return RedirectToAction("Confirmation", new { id = appointment.ConfirmationNumber });
             }
 
             // Initialize available time slots when returning the view
@@ -115,7 +112,7 @@ namespace ClinicAppointment.Controllers
             await _context.SaveChangesAsync();
 
             // Show success message
-            TempData["SuccessMessage"] = "Appointment confirmed successfully!";
+            // TempData["SuccessMessage"] = "Appointment confirmed successfully!";
             
             return View(appointment);
         }

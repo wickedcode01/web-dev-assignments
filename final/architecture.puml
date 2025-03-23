@@ -1,0 +1,34 @@
+@startuml Clinic Appointment System Architecture
+!theme mars
+
+
+
+cloud "Docker Container" {
+  package "Frontend" {
+    [ASP.NET MVC Views] as Views
+    [Static Files\n(wwwroot)] as Static
+
+}
+
+package "Backend" {
+    [ASP.NET MVC Controllers] as Controllers
+    [ASP.NET MVC Models] as Models
+}
+
+package "Data Layer" {
+    database "SQLite\nDatabase" as DB
+    [Entity Framework\nCore] as EF
+}
+
+}
+
+Views --> Controllers : HTTP Requests
+Controllers --> Models : Data Operations
+Models --> EF
+
+EF --> DB : CRUD Operations
+Static --> Views : Resources
+
+
+
+@enduml

@@ -54,7 +54,11 @@
             <input asp-for="PatientEmail" type="email" class="form-control" required />
             <span asp-validation-for="PatientEmail" class="text-danger"></span>
         </div>
-
+        <div class="form-group mb-3">
+            <label asp-for="Phone">Phone:</label>
+            <input asp-for="Phone" type="phone" class="form-control" required />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
         <div class="form-group mb-3">
             <label asp-for="Description">Brief Description:</label>
             <textarea asp-for="Description" class="form-control" rows="3"></textarea>

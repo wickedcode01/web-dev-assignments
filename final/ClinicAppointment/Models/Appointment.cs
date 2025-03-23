@@ -11,24 +11,26 @@ namespace ClinicAppointment.Models
         public DateTime AppointmentDate { get; set; }
 
         [Required]
-        public string AppointmentType { get; set; }
+        public required string AppointmentType { get; set; }
 
         [Required]
-        public string TimeSlot { get; set; }
+        public required string TimeSlot { get; set; }
 
         [Required]
-        public string PatientName { get; set; }
+        public required string PatientName { get; set; }
 
-
+        [Required]
+        [Phone]
+        public required string Phone { get; set; }
 
         [Required]
         [EmailAddress]
-        public string PatientEmail { get; set; }
+        public required string PatientEmail { get; set; }
 
         public string? Description { get; set; }
-        
+
         public string? UserId { get; set; }
-        
+
         public string? ConfirmationNumber { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
