@@ -178,7 +178,7 @@ namespace ClinicAppointment.Controllers
             await _context.SaveChangesAsync();
 
             // Show success message
-            // TempData["SuccessMessage"] = "Appointment confirmed successfully!";
+            TempData["SuccessMessage"] = "Appointment confirmed successfully!";
             
             return View(appointment);
         }
