@@ -1,0 +1,110 @@
+@startuml
+!theme mars
+
+' Styling
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' Entities
+entity "Patient" as patient {
+    *id : int <<PK>>
+    --
+    *firstName : string
+    *lastName : string
+    *dateOfBirth : DateTime
+    *phone : string
+    *email : string
+    address : string
+    gender : string
+    *createdAt : DateTime
+    *updatedAt : DateTime
+    emergencyContact : string
+    emergencyPhone : string
+    medicalHistory : text
+}
+
+entity "Doctor" as doctor {
+    *id : int <<PK>>
+    --
+    *firstName : string
+    *lastName : string
+    *specialization : string
+    *email : string
+    *phone : string
+    *licenseNumber : string
+    *isActive : boolean
+    *createdAt : DateTime
+    *updatedAt : DateTime
+}
+
+entity "Appointment" as appointment {
+    *id : int <<PK>>
+    --
+    *patientId : int <<FK>>
+    *doctorId : int <<FK>>
+    *appointmentDate : DateTime
+    *appointmentType : string
+    *timeSlot : string
+    description : string
+    *status : AppointmentStatus
+    confirmationNumber : string
+    *createdAt : DateTime
+    *updatedAt : DateTime
+    cancellationReason : string
+    followUpNeeded : boolean
+}
+
+entity "AppointmentType" as appointmentType {
+    *type : string <<PK>>
+    --
+    *name : string
+    *duration : int
+    *price : decimal
+    description : string
+    *isActive : boolean
+}
+
+entity "MedicalRecord" as medicalRecord {
+    *id : int <<PK>>
+    --
+    *patientId : int <<FK>>
+    *appointmentId : int <<FK>>
+    *doctorId : int <<FK>>
+    *diagnosis : string
+    *treatment : string
+    prescription : string
+    notes : text
+    *createdAt : DateTime
+    *updatedAt : DateTime
+}
+
+entity "Schedule" as schedule {
+    *id : int <<PK>>
+    --
+    *doctorId : int <<FK>>
+    *dayOfWeek : int
+    *startTime : Time
+    *endTime : Time
+    *isAvailable : boolean
+}
+
+enum "AppointmentStatus" as status {
+    Pending
+    Confirmed
+    Cancelled
+    Expired
+}
+
+' Relationships
+patient ||--o{ appointment : has >
+doctor ||--o{ appointment : conducts >
+appointment }-- status : has status >
+appointment }-- appointmentType : has type >
+appointment ||--o{ medicalRecord : generates >
+doctor ||--o{ schedule : has >
+patient ||--o{ medicalRecord : owns >
+doctor ||--o{ medicalRecord : creates >
+@enduml

@@ -1,0 +1,129 @@
+@startuml ASP.NET Core Identity and Application ER Diagram
+
+!theme mars
+
+' Styling
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+
+' ASP.NET Core Identity Entities
+entity "AspNetUsers" as users {
+    *Id : string <<PK>>
+    --
+    *UserName : string
+    *NormalizedUserName : string
+    *Email : string
+    *NormalizedEmail : string
+    *EmailConfirmed : boolean
+    *PasswordHash : string
+    *SecurityStamp : string
+    *ConcurrencyStamp : string
+    PhoneNumber : string
+    *PhoneNumberConfirmed : boolean
+    *TwoFactorEnabled : boolean
+    LockoutEnd : DateTime
+    *LockoutEnabled : boolean
+    *AccessFailedCount : int
+}
+
+entity "AspNetRoles" as roles {
+    *Id : string <<PK>>
+    --
+    *Name : string
+    *NormalizedName : string
+    ConcurrencyStamp : string
+}
+
+entity "AspNetUserRoles" as userRoles {
+    *UserId : string <<PK, FK>>
+    *RoleId : string <<PK, FK>>
+}
+
+entity "AspNetUserClaims" as userClaims {
+    *Id : int <<PK>>
+    --
+    *UserId : string <<FK>>
+    *ClaimType : string
+    *ClaimValue : string
+}
+
+entity "AspNetRoleClaims" as roleClaims {
+    *Id : int <<PK>>
+    --
+    *RoleId : string <<FK>>
+    *ClaimType : string
+    *ClaimValue : string
+}
+
+entity "AspNetUserLogins" as userLogins {
+    *LoginProvider : string <<PK>>
+    *ProviderKey : string <<PK>>
+    --
+    *UserId : string <<FK>>
+    ProviderDisplayName : string
+}
+
+entity "AspNetUserTokens" as userTokens {
+    *UserId : string <<PK, FK>>
+    *LoginProvider : string <<PK>>
+    *Name : string <<PK>>
+    --
+    *Value : string
+}
+
+' Application Entities
+entity "Appointment" as appointment {
+    *id : int <<PK>>
+    --
+    *UserId : string <<FK>>
+    *AppointmentDate : DateTime
+    *AppointmentType : string
+    *TimeSlot : string
+    *PatientName : string
+    *Phone : string
+    *PatientEmail : string
+    Description : string
+    ConfirmationNumber : string
+    *CreatedAt : DateTime
+    *Status : AppointmentStatus
+}
+
+enum "AppointmentStatus" as status {
+    Pending
+    Confirmed
+    Cancelled
+    Expired
+}
+
+entity "AppointmentType" as appointmentType {
+    *type : string <<PK>>
+    --
+    *name : string
+    description : string
+}
+
+' Identity Relationships
+users ||--o{ userRoles : has >
+roles ||--o{ userRoles : has >
+users ||--o{ userClaims : has >
+roles ||--o{ roleClaims : has >
+users ||--o{ userLogins : has >
+users ||--o{ userTokens : has >
+
+' Application Relationships
+users ||--o{ appointment : creates >
+appointment }-- status : has status >
+appointment }-- appointmentType : has type >
+
+note bottom of users
+  ASP.NET Core Identity User Management
+end note
+
+note bottom of appointment
+  Links to Identity User through UserId
+end note
+
+@enduml 
