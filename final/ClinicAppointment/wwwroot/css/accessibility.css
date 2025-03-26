@@ -1,0 +1,111 @@
+/* Screen reader only class */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #000;
+}
+
+.skip-to-main:focus {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* Improved table accessibility */
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Improved error messages */
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Improved success messages */
+.valid-feedback {
+    display: block;
+    color: #28a745;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Improved alert accessibility */
+.alert {
+    position: relative;
+    padding-right: 3rem;
+}
+
+.alert .btn-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Improved navigation accessibility */
+.navbar-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-item {
+    margin: 0;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+/* Improved button accessibility */
+button:not([type="button"]):not([type="reset"]):not([type="submit"]) {
+    type: button;
+}
+
+/* Improved image accessibility */
+img:not([alt]) {
+    border: 2px dashed #dc3545;
+}
+
+/* Improved heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Improved list accessibility */
+ul, ol {
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Improved paragraph spacing */
+p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+} 

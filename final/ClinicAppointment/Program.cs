@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using ClinicAppointment.Data;
 using NodaTime;
+using ClinicAppointment.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite("Data Source=Events.db"));
+
+// Register WaitTimeService
+builder.Services.AddScoped<IWaitTimeService, WaitTimeService>();
 
 // Add Identity services
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>

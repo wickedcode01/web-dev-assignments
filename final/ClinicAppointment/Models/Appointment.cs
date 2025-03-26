@@ -42,6 +42,7 @@ namespace ClinicAppointment.Models
     {
         Pending,
         Confirmed,
-        Cancelled
+        Cancelled,
+        Expired
     }
 } 
