@@ -49,6 +49,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
+    
+    // Initialize seed data
+    await SeedData.Initialize(services);
 }
 
 app.Run();
