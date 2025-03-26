@@ -1,6 +1,48 @@
 ﻿@{
-	ViewBag.title = "About Us";
+    ViewData["Title"] = "About Us";
 }
 
-<h2>About Our Clinic</h2>
-<p>Welcome to our health clinic. We provide high-quality medical services. And provide you an option to schedule your appointment and vaccination appointment online.</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-4">About Our Clinic</h1>
+            <p class="lead">Providing quality healthcare with easy appointment scheduling.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center text-center">
+        <div class="col-lg-6 ">
+            <img src="data:image/jpeg;base64,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" class="img-fluid rounded shadow" alt="Clinic Image">
+        </div>
+        <div class="col-lg-6 d-flex align-items-center mt-4">
+            <p class="text-muted">
+                Our clinic is dedicated to providing top-notch healthcare services. With experienced doctors and a streamlined appointment booking system, we ensure that you get the best medical attention without the hassle of long waiting times.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-4 text-center">
+            <i class="fas fa-user-md fa-3x text-primary"></i>
+            <h4 class="mt-3">Experienced Doctors</h4>
+            <p>Our team of certified medical professionals is here to assist you.</p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <i class="fas fa-calendar-check fa-3x text-success"></i>
+            <h4 class="mt-3">Easy Appointments</h4>
+            <p>Book appointments seamlessly with our online system.</p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <i class="fas fa-heartbeat fa-3x text-danger"></i>
+            <h4 class="mt-3">Quality Care</h4>
+            <p>Your health and well-being are our top priority.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-12 text-center">
+            <h3>Contact Us</h3>
+            <p>Email: support@clinicappointment.ca | Phone: (123) 456-7890</p>
+        </div>
+    </div>
+</div>
