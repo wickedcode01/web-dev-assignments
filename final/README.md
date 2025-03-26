@@ -30,7 +30,11 @@ A modern, containerized web application for managing clinic appointments built w
    1. Open `ClinicAppointment.sln` in Visual Studio
    2. Press F5 or click the "Start Debugging" button to run the application.
 
-3. The application will automatically pop up or based on your configuration you can access the application at `https://localhost:8081`(Docker), `https://localhost:7145`(https) or `https://localhost:44331`(IIS).
+3. The application will automatically pop up. 
+If not, based on your configuration you can access the application at
+   - `https://localhost:8081`(Docker), 
+   - `https://localhost:7145`(https)
+   - `https://localhost:44331`(IIS).
 
 ## 🛠️ Technologies Used
 
@@ -39,6 +43,7 @@ A modern, containerized web application for managing clinic appointments built w
 - SQLite Database
 - Docker
 - HTML/CSS/JavaScript (wwwroot)
+- Bootstrap
 
 
 ## 📁 Project Structure
