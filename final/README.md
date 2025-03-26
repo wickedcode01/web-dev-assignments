@@ -79,3 +79,9 @@ The application includes Docker support for containerized deployment:
 - Environment-specific configurations
 - Ready for cloud deployment
 
+## Contributions
+|Name|Role|Responsibilties|
+|--|--|--|
+|Shijie Yin|Architect| Responsible for designing the architecture and create overall structure.|
+|Yashvi Patel|Developer||
+|Muinat Usman|Product Manager||
