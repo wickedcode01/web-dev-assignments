@@ -64,6 +64,7 @@ ClinicAppointment/
 ![Clinic Appointment System Wireframe](wireframe.jpeg)
 ## 🏗️ Architecture
 ![architecture](image.png)
+
 The application follows a clean MVC architecture:
 
 - **Frontend**: ASP.NET MVC Views and Bootstrap (HTML/CSS/JS)
