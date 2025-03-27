@@ -88,5 +88,5 @@ The application includes Docker support for containerized deployment:
 |Name|Role|Responsibilties|
 |--|--|--|
 |Shijie Yin|Architect| <li>Responsible for designing the architecture and create overall structure.</li> <li>Fix bugs and technical issues.</li> <li>Improve accessability of application.</li>|
-|Yashvi Patel|Developer||
+|Yashvi Patel|Developer|<li>Worked on admin  functionality  and role  based  login </li><li>Worked on bugs and make the Application responsive</li>|
 |Muinat Usman|Product Manager|<li>Responsible for designing the Wireframe and User Story.</li> <li>Also ensured that all the features were included and functional.</li>|
