@@ -28,6 +28,9 @@
                 <td>@appointment.TimeSlot</td>
                 <td>@appointment.AppointmentType</td>
                 <td>@appointment.Status</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@appointment.Id" class="btn btn-sm btn-warning">Edit</a>
+                    </td>
             </tr>
         }
     </tbody>
