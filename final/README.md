@@ -20,10 +20,11 @@ A modern, containerized web application for managing clinic appointments built w
 
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
-   cd ClinicAppointment
+   git clone https://github.com/wickedcode01/web-dev-assignments.git
+   cd final
    ```
-2. Open Visual Studio 2022
+   or **download the zip**
+3. Open Visual Studio 2022
 
 2. Build and run:
 
